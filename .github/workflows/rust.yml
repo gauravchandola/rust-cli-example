@@ -14,10 +14,18 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    
     steps:
     - uses: actions/checkout@v4
     - name: Build
       run: cargo build --verbose
+
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        components: rustfmt
+
+    - name: Run rustfmt check
+      run: cargo fmt --all --check
    # - name: Run tests
     #  run: cargo test --verbose
